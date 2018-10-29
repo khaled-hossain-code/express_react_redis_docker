@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Fib from './Fib';
 import OtherPage from './OtherPage';
@@ -16,8 +15,8 @@ class App extends Component {
             <Link to="/otherpage">Other Page</Link>
           </header>
           <div>
-            <Route exact path="/" compoponent={Fib} />
-            <Route path="/otherpage" compoponent={OtherPage} />
+            <Route exact path="/" component={Fib} />
+            <Route path="/otherpage" component={OtherPage} />
           </div>
         </div>
       </Router>

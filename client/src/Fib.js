@@ -14,13 +14,14 @@ export default class Fib extends Component {
   }
   
   async fetchValues() {
-    const values = await axios.get('/api/values/current').data;
-    this.setState({values});
+    const values = await axios.get('/api/values/current');
+    this.setState({values: values.data});
   }
 
   async fetchIndexes() {
-    const seenIndexes = await axios.get('/api/values/all').data;
-    this.setState({seenIndexes});
+    const seenIndexes = await axios.get('/api/values/all');
+
+    this.setState({seenIndexes: seenIndexes.data});
   }
 
   renderSeenIndexes() {
@@ -29,7 +30,6 @@ export default class Fib extends Component {
 
   renderValues() {
     const entries = [];
-
     for( let key in this.state.values) {
       entries.push(
         <div key={key}>
