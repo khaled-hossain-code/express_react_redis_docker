@@ -1,0 +1,29 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  # build client dev image for testing
+  - docker build -t khaled/react -f ./client/Dockerfile.dev ./client
+  # build server image for testing
+  # build worker image for testing
+
+scripts:
+# if we don't flag coverage then react test will wait infinitely
+  - docker run khaled/react npm test -- --coverage
+# add server side test command. e.g: - docker run khaled/server npm test 
+# add client side test command
+
+after_success:
+# build production image to deploy
+  - docker build -t khossain/multi-client ./client
+  - docker build -t khossain/multi-nginx ./nginx
+  - docker build -t khossain/multi-server ./server
+  - docker build -t khossain/multi-worker ./worker
+# log in to docker hub to deploy these images
+# set dockerID and pass to travisCI envrionment variable
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push khossain/multi-client
+  - docker push khossain/multi-nginx
+  - docker push khossain/multi-server
+  - docker push khossain/multi-worker
