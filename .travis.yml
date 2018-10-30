@@ -5,13 +5,13 @@ services:
 
 before_install:
   # build client dev image for testing
-  - docker build -t khaled/react -f ./client/Dockerfile.dev ./client
+  - docker build -t khossain/react -f ./client/Dockerfile.dev ./client
   # build server image for testing
   # build worker image for testing
 
 scripts:
 # if we don't flag coverage then react test will wait infinitely
-  - docker run khaled/react npm test -- --coverage
+  - docker run khossain/react npm run test -- --coverage
 # add server side test command. e.g: - docker run khaled/server npm test 
 # add client side test command
 
