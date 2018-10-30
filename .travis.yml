@@ -23,7 +23,7 @@ after_success:
   - docker build -t khossain/multi-worker ./worker
   # log in to docker hub to deploy these images
   # set dockerID and pass to travisCI envrionment variable
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
   # push production images to docker hub 
   - docker push khossain/multi-client
   - docker push khossain/multi-nginx
