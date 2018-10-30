@@ -16,15 +16,15 @@ script:
   # add client side test command
 
 # build production image to deploy
+  # log in to docker hub to deploy these images
+  # set dockerID and pass to travisCI envrionment variable
+  # push production images to docker hub 
 after_success:
   - docker build -t khossain/multi-client ./client
   - docker build -t khossain/multi-nginx ./nginx
   - docker build -t khossain/multi-server ./server
   - docker build -t khossain/multi-worker ./worker
-  # log in to docker hub to deploy these images
-  # set dockerID and pass to travisCI envrionment variable
-  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
-  # push production images to docker hub 
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push khossain/multi-client
   - docker push khossain/multi-nginx
   - docker push khossain/multi-server
