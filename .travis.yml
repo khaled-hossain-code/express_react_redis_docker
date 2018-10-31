@@ -31,3 +31,21 @@ after_success:
   - docker push khossain/multi-server
   - docker push khossain/multi-worker
 
+# deploy:
+#   provider: elasticbeanstalk
+#   region: us-west-1
+#   # create a multicontainer app in elasticbeanstalk and use that name
+#   app: multi-docker
+#   # create env in elasticbeanstalk for the created app and put all redis host port rds host port user there and use that env name
+#   env: MultiDocker-env
+#   # elasticbeanstalk should create a bucket in s3, use that one
+#   bucker_name: elasticbeanstalk-us-west-1-358586960
+#   bucket_path: docker-multi
+#   on:
+#     branch: master
+#     # set the access key & secret key in travis env
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key:
+#     secure: $AWS_SECRET_KEY
+  
+
