@@ -24,9 +24,10 @@ after_success:
   - docker build -t khossain/multi-nginx ./nginx
   - docker build -t khossain/multi-server ./server
   - docker build -t khossain/multi-worker ./worker
+  # password must be without speacial character, if we use special character we have to use escape
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push khossain/multi-client
+  - docker push khossain/multi-nginx
+  - docker push khossain/multi-server
+  - docker push khossain/multi-worker
 
-deploy:
-  provider: script
-  script: bash docker_push
-  on:
-    branch: master
